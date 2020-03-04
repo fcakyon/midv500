@@ -1,0 +1,11 @@
+name: midv500tococo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.7
+  - pip
+  - pip:
+    - opencv-python 
+    - numpy
+    - tqdm
