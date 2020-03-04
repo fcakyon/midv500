@@ -78,7 +78,7 @@ def convert(root_dir, export_dir):
         # prepare annotation info
         annotation_dict = dict()
         annotation_dict["iscrowd"] = 0
-        annotation_dict["image_id"] = ind
+        annotation_dict["image_id"] = image_dict['id']
         annotation_dict['category_id'] = 1 # id card
         annotation_dict['ignore'] = 0
         annotation_dict['id'] = ind
