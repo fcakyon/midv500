@@ -11,12 +11,9 @@ MIDV-500 consists of 500 video clips for 50 different identity document types wi
 
 You can find more detail on: [MIDV-500: A Dataset for Identity Documents Analysis and Recognition on Mobile Devices in Video Stream](https://arxiv.org/abs/1807.05786)
 
-## Dependencies
+## Installation
 Manually install Miniconda (Python3) for your OS:
 https://docs.conda.io/en/latest/miniconda.html
-
-
-
 
 Install Miniconda (Python3) by bash script on Linux:
 ```console
@@ -40,8 +37,7 @@ midv500-to-coco$ python -m unittest
 
 Tested both on Ubuntu and Windows.
 
-## Run Instructions
-
+## Usage
 In the base project directory, open up a terminal/anaconda promt window, and 
 activate environment:
 ```console
