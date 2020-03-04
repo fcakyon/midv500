@@ -78,7 +78,7 @@ def list_annotation_paths_recursively(directory, ignore_background_only_ones=Tru
                     if intersect_area < 1:
                         continue
                     
-                relative_filepath = abs_filepath.split(directory+os.sep)[-1]
+                relative_filepath = abs_filepath.split(directory)[-1]
                 relative_filepath = relative_filepath.replace("\\","/") # for windows
                 relative_filepath_list.append(relative_filepath)
                 

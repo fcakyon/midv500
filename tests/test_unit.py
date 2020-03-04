@@ -1,7 +1,5 @@
 import unittest
 
-zip_url = "github.com/fcakyon/midv500-to-coco/tests/test_data/CS43_01.zip"
-
 class ConverterTests(unittest.TestCase):
     
     def test_calculate_intersect_area(self):
@@ -49,7 +47,7 @@ class ConverterTests(unittest.TestCase):
         from utils import download
         # check if annotations paths can be read
         
-        url = "github.com/fcakyon/midv500-to-coco/tests/test_data/CA43_01.zip"
+        url = "https://github.com/fcakyon/midv500-to-coco/blob/master/tests/test_data/CA43_01.zip"
         save_dir = "github.com/fcakyon/midv500-to-coco/tests/test_data/"
         # read annotations paths
         download(url, save_dir)

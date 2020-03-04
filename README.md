@@ -55,7 +55,7 @@ midv500-to-coco$ python download_dataset.py data/
 
 Create coco annotations to coco/midv500.json using the dataset placed in "data/":
 ```console
-midv500-to-coco$ python convert_dataset.py data/ coco/midv500.json
+midv500-to-coco$ python convert_dataset.py data/ coco/
 ```
 
 ## Citation

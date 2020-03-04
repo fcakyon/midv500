@@ -3,19 +3,20 @@ import cv2
 import json
 import argparse
 import numpy as np
+from tqdm import tqdm
 from utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
 
-def convert(root_dir, export_path):
+def convert(root_dir, export_dir):
     """
     Walks inside root_dir (should oly contain original midv500 dataset folders), 
-    reads all annotations, and creates coco styled annotation file at export_path.
+    reads all annotations, and creates coco styled annotation file 
+    named as midv500_coco.json saved to export_dir.
     Sample inputs:
         root_dir: ~/data/midv500/
-        export_path: ~/data/midv500_coco.json
+        export_dir: ~/data/
     """
     
     # create export_dir if not present
-    export_dir = export_path.split(os.sep)[:-1]
     create_dir(export_dir)
     
     # init coco vars
@@ -23,14 +24,15 @@ def convert(root_dir, export_path):
     annotations = []
     
     annotation_paths = list_annotation_paths_recursively(root_dir)
-    for ind, rel_annotation_path in enumerate(annotation_paths):
+    print("Converting to coco.")
+    for ind, rel_annotation_path in enumerate(tqdm(annotation_paths)):
         # get image path
         rel_image_path = rel_annotation_path.replace("ground_truth","images")
         rel_image_path = rel_image_path.replace("json","tif")
         
         # load image
         abs_image_path = os.path.join(root_dir, rel_image_path)
-        image = cv2.imread(os.path.join(root_dir, abs_image_path))
+        image = cv2.imread(abs_image_path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
         # prepare image info
@@ -56,22 +58,22 @@ def convert(root_dir, export_path):
         
         # create mask from poly coords
         mask = np.zeros(image.shape, dtype=np.uint8)
-        coords = np.array(mask_coords, dtype=np.int32)
-        cv2.fillPoly(mask, coords.reshape(-1, 4, 2), color=(255,255,255))
+        mask_coords_np = np.array(mask_coords, dtype=np.int32)
+        cv2.fillPoly(mask, mask_coords_np.reshape(-1, 4, 2), color=(255,255,255))
         mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
         mask = cv2.threshold(mask, 0,255, cv2.THRESH_BINARY)[1]
         
-        # get bounding box coordinates of the mask
-        label_xmin = min([pos[0] for pos in coords])
-        label_xmax = max([pos[0] for pos in coords])
-        label_ymin = min([pos[1] for pos in coords])
-        label_ymax = max([pos[1] for pos in coords])
+        # get voc style bounding box coordinates [minx, miny, maxx, maxy] of the mask
+        label_xmin = min([pos[0] for pos in mask_coords])
+        label_xmax = max([pos[0] for pos in mask_coords])
+        label_ymin = min([pos[1] for pos in mask_coords])
+        label_ymax = max([pos[1] for pos in mask_coords])
         label_bbox = [label_xmin, label_ymin, label_xmax, label_ymax]
         label_bbox = get_bbox_inside_image(label_bbox, image_bbox)
         
-        # calculate coco style bbox
-        label_bbox = [label_bbox[0], label_bbox[1], label_bbox[2]-label_bbox[0], label_bbox[3]-label_bbox[1]]
+        # calculate coco style bbox coords [minx, miny, width, height] and area
         label_area = int((label_bbox[2]-label_bbox[0]) * (label_bbox[3]-label_bbox[1]))
+        label_bbox = [label_bbox[0], label_bbox[1], label_bbox[2]-label_bbox[0], label_bbox[3]-label_bbox[1]]
         
         # prepare annotation info
         annotation_dict = dict()
@@ -83,7 +85,7 @@ def convert(root_dir, export_path):
         
         annotation_dict['bbox'] = label_bbox
         annotation_dict['area'] = label_area
-        annotation_dict['segmentation'] = [[single_coord for coord_pair in coords for single_coord in coord_pair]]
+        annotation_dict['segmentation'] = [[single_coord for coord_pair in mask_coords for single_coord in coord_pair]]
         # add annotation info
         annotations.append(annotation_dict)
         
@@ -94,6 +96,7 @@ def convert(root_dir, export_path):
     coco_dict["categories"] = {'name': 'id_card', 'id': 1}
     
     # export coco dict
+    export_path = os.path.join(export_dir, "midv500_coco.json")
     with open(export_path, 'w') as f:
         json.dump(coco_dict, f)
         
@@ -103,7 +106,7 @@ if __name__ == '__main__':
     
     # add the arguments to the parser
     ap.add_argument("root_dir", default="data/", help="Directory of the downloaded MIDV-500 dataset.")
-    ap.add_argument("export_path", default="coco/midv500.json", help="Directory for coco file to be exported.")
+    ap.add_argument("export_path", default="coco/", help="Directory for coco file to be exported.")
     args = vars(ap.parse_args())
     
     # convert dataset
