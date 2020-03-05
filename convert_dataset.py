@@ -16,6 +16,10 @@ def convert(root_dir, export_dir):
         export_dir: ~/data/
     """
     
+    # raise error if export_dir is given as a json file path
+    if "json" in export_dir:
+        raise ValueError('export_dir should be a directory, not a file path!')
+        
     # create export_dir if not present
     create_dir(export_dir)
     
@@ -106,8 +110,8 @@ if __name__ == '__main__':
     
     # add the arguments to the parser
     ap.add_argument("root_dir", default="data/", help="Directory of the downloaded MIDV-500 dataset.")
-    ap.add_argument("export_path", default="coco/", help="Directory for coco file to be exported.")
+    ap.add_argument("export_dir", default="coco/", help="Directory for coco file to be exported.")
     args = vars(ap.parse_args())
     
     # convert dataset
-    convert(args['root_dir'], args['export_path'])
+    convert(args['root_dir'], args['export_dir'])
