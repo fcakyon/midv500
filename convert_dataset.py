@@ -93,7 +93,7 @@ def convert(root_dir, export_dir):
     coco_dict = dict()
     coco_dict["images"] = images
     coco_dict["annotations"] = annotations
-    coco_dict["categories"] = {'name': 'id_card', 'id': 1}
+    coco_dict["categories"] = [{'name': 'id_card', 'id': 1}]
     
     # export coco dict
     export_path = os.path.join(export_dir, "midv500_coco.json")
