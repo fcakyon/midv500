@@ -89,6 +89,9 @@ def list_annotation_paths_recursively(directory, ignore_background_only_ones=Tru
     return relative_filepath_list
 
 def create_dir(_dir):
+    """
+    Creates given directory if it is not present.
+    """
     if not os.path.exists(_dir):
         os.makedirs(_dir)
     
