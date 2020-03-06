@@ -4,7 +4,7 @@ import zipfile
 from tqdm import tqdm
 from urllib.request import urlretrieve
 
-def calculate_intersect_area(bbox1, bbox2):
+def calculate_intersect_area(bbox1: list, bbox2: list) -> list:
     """
     Calculates the returns the intersected area btw given bboxes.
     Bounding boxes in the form of: [xmin, ymin, xmax, ymax]
@@ -20,7 +20,7 @@ def calculate_intersect_area(bbox1, bbox2):
     
     return intersect_area
 
-def get_bbox_inside_image(label_bbox, image_bbox):
+def get_bbox_inside_image(label_bbox: list, image_bbox: list) -> list:
     """
     Corrects label_bbox so that all points are inside image bbox.
     Returns the corrected bbox.
@@ -33,7 +33,7 @@ def get_bbox_inside_image(label_bbox, image_bbox):
     
     return corrected_label_bbox
 
-def list_annotation_paths_recursively(directory, ignore_background_only_ones=True):
+def list_annotation_paths_recursively(directory: str, ignore_background_only_ones: bool =True) -> list:
     """
     Accepts a folder directory containing image files.
     Returns a list of image file paths present in given directory.
@@ -88,7 +88,7 @@ def list_annotation_paths_recursively(directory, ignore_background_only_ones=Tru
 
     return relative_filepath_list
 
-def create_dir(_dir):
+def create_dir(_dir: str):
     """
     Creates given directory if it is not present.
     """
@@ -113,7 +113,7 @@ class TqdmUpTo(tqdm):
             self.total = tsize
         self.update(b * bsize - self.n)  # will also set self.n = b * bsize
 
-def download(url, save_dir):
+def download(url: str, save_dir: str):
     """
     Downloads file by http request, shows remaining time.
     https://pypi.org/project/tqdm/#hooks-and-callbacks
@@ -130,7 +130,7 @@ def download(url, save_dir):
         urlretrieve(url, filename = os.path.join(save_dir,url.split('/')[-1]),
                     reporthook=t.update_to, data=None)
 
-def unzip(file_path, dest_dir):
+def unzip(file_path: str, dest_dir: str):
     """
     Unzips compressed .zip file.
     Example inputs:

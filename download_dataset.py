@@ -53,7 +53,7 @@ all_links = ['ftp://smartengines.com/midv-500/dataset/01_alb_id.zip',
              'ftp://smartengines.com/midv-500/dataset/49_usa_ssn82.zip',
              'ftp://smartengines.com/midv-500/dataset/50_xpo_id.zip']
 
-def download_dataset(download_dir):
+def download_dataset(download_dir: str):
     """
     This script downloads the MIDV-500 dataset and unzips the folders.
     """

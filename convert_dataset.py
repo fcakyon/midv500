@@ -6,7 +6,7 @@ import numpy as np
 from tqdm import tqdm
 from utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
 
-def convert(root_dir, export_dir):
+def convert(root_dir: str, export_dir: str):
     """
     Walks inside root_dir (should oly contain original midv500 dataset folders), 
     reads all annotations, and creates coco styled annotation file 
