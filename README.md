@@ -54,17 +54,3 @@ Create coco annotations to coco/midv500.json using the dataset placed in "data/"
 midv500-to-coco$ python convert_dataset.py data/ coco/
 ```
 
-## Citation
-If you use MIDV-500 dataset in your work, you can cite
-```
-@article{arlazarov2019midv,
-  title={MIDV-500: a dataset for identity document analysis and recognition on mobile devices in video stream},
-  author={Arlazarov, Vladimir Viktorovich and Bulatov, Konstantin Bulatovich and Chernov, Timofey Sergeevich and Arlazarov, Vladimir Lvovich},
-  journal={Компьютерная оптика},
-  volume={43},
-  number={5},
-  year={2019},
-  publisher={Федеральное государственное автономное образовательное учреждение высшего~…}
-}
-```
-
