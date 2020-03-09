@@ -48,7 +48,7 @@ class ConverterTests(unittest.TestCase):
         # check if annotations paths can be read
         
         url = "https://github.com/fcakyon/midv500-to-coco/blob/master/tests/test_data/CA43_01.zip"
-        save_dir = "github.com/fcakyon/midv500-to-coco/tests/test_data/"
+        save_dir = "tests/test_data/"
         # read annotations paths
         download(url, save_dir)
         
