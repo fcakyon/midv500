@@ -60,10 +60,14 @@ def list_annotation_paths_recursively(directory: str, ignore_background_only_one
                 # pass if sample id card json (such as 43_tur_id.json)
                 if "id" in abs_filepath.split(os.sep)[-1]:
                     continue
-                
-                # load poly
-                quad = json.load(open(abs_filepath, 'r'))
-                coords = quad['quad']
+                else:
+                    try:
+                        # load poly
+                        quad = json.load(open(abs_filepath, 'r'))
+                        coords = quad['quad'] 
+                    except:
+                        # fix for 29_irn_drvlic.json
+                        continue
                 
                 # reformat corners
                 label_xmin = min([pos[0] for pos in coords])
