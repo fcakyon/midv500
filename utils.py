@@ -119,7 +119,7 @@ def download(url: str, save_dir: str):
     https://pypi.org/project/tqdm/#hooks-and-callbacks
     Example inputs:
         url: 'ftp://smartengines.com/midv-500/dataset/01_alb_id.zip'
-        save_path: 'data/01_alb_id.zip'
+        save_dir: 'data/'
     """
 
     # create save_dir if not present
