@@ -1,56 +1,40 @@
-***
-
-
-# Convert MIDV-500 annotations to COCO instance segmentation format
-This repo can be used to automatically download/unzip MIDV-500 dataset and convert the annotations into COCO instance segmentation format.
+## Download and convert MIDV-500 dataset into COCO instance segmentation format
+Automatically download/unzip MIDV-500 dataset and convert the annotations into COCO instance segmentation format.
 
 Then, dataset can be directly used in the training of Yolact, Detectron type of models.
+
+ **Package maintainer: Fatih Cagatay Akyon**
+
 
 ## MIDV-500 Dataset
 MIDV-500 consists of 500 video clips for 50 different identity document types with ground truth which allows to perform research in a wide scope of various document analysis problems.
 
+<img width="1000" alt="teaser" src="./figures/midv500.png">
+
 You can find more detail on: [MIDV-500: A Dataset for Identity Documents Analysis and Recognition on Mobile Devices in Video Stream](https://arxiv.org/abs/1807.05786)
 
-## Installation
-Manually install Miniconda (Python3) for your OS:
-https://docs.conda.io/en/latest/miniconda.html
 
-Install Miniconda (Python3) by bash script on Linux:
+## Getting started
+### Installation
 ```console
-~$ sudo apt update --yes
-~$ sudo apt upgrade --yes
-~$ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-~$ bash ~/miniconda.sh -b -p ~/miniconda 
-~$ rm ~/miniconda.sh
+pip install midv500
 ```
 
-Inside the base project directory, open up a terminal/anaconda promt window 
-and create environment:
-```console
-midv500-to-coco$ conda env create -f environment.yml
-```
+### Usage
+```python
+# import package
+import midv500
 
-After environment setup, run the tests to see if everything is ready:
-```console
-midv500-to-coco$ python -m unittest
-```
+# set directory for dataset to be downloaded
+dataset_dir = 'data/midv500/'
 
-Tested both on Ubuntu and Windows.
+# download and unzip midv500 dataset
+midv500.download_dataset(dataset_dir)
 
-## Usage
-In the base project directory, open up a terminal/anaconda promt window, and 
-activate environment:
-```console
-midv500-to-coco$ conda activate midv500tococo
-```
+# set directory for coco annotations to be saved
+export_dir = 'data/midv500/'
 
-Download dataset to "data/":
-```console
-midv500-to-coco$ python download_dataset.py data/
-```
-
-Create coco annotations to coco/midv500.json using the dataset placed in "data/":
-```console
-midv500-to-coco$ python convert_dataset.py data/ coco/
+# convert midv500 annotations to coco format
+midv500.convert_to_coco(dataset_dir, export_dir)
 ```
 
