@@ -6,6 +6,7 @@ import numpy as np
 from tqdm import tqdm
 from midv500.utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
 
+
 def convert(root_dir: str, export_dir: str):
     """
     Walks inside root_dir (should oly contain original midv500 dataset folders),
@@ -31,8 +32,8 @@ def convert(root_dir: str, export_dir: str):
     print("Converting to coco.")
     for ind, rel_annotation_path in enumerate(tqdm(annotation_paths)):
         # get image path
-        rel_image_path = rel_annotation_path.replace("ground_truth","images")
-        rel_image_path = rel_image_path.replace("json","tif")
+        rel_image_path = rel_annotation_path.replace("ground_truth", "images")
+        rel_image_path = rel_image_path.replace("json", "tif")
 
         # load image
         abs_image_path = os.path.join(root_dir, rel_image_path)
@@ -63,9 +64,9 @@ def convert(root_dir: str, export_dir: str):
         # create mask from poly coords
         mask = np.zeros(image.shape, dtype=np.uint8)
         mask_coords_np = np.array(mask_coords, dtype=np.int32)
-        cv2.fillPoly(mask, mask_coords_np.reshape(-1, 4, 2), color=(255,255,255))
+        cv2.fillPoly(mask, mask_coords_np.reshape(-1, 4, 2), color=(255, 255, 255))
         mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-        mask = cv2.threshold(mask, 0,255, cv2.THRESH_BINARY)[1]
+        mask = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY)[1]
 
         # get voc style bounding box coordinates [minx, miny, maxx, maxy] of the mask
         label_xmin = min([pos[0] for pos in mask_coords])
@@ -83,7 +84,7 @@ def convert(root_dir: str, export_dir: str):
         annotation_dict = dict()
         annotation_dict["iscrowd"] = 0
         annotation_dict["image_id"] = image_dict['id']
-        annotation_dict['category_id'] = 1 # id card
+        annotation_dict['category_id'] = 1  # id card
         annotation_dict['ignore'] = 0
         annotation_dict['id'] = ind
 

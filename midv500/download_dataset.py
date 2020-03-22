@@ -53,6 +53,7 @@ all_links = ['ftp://smartengines.com/midv-500/dataset/01_alb_id.zip',
              'ftp://smartengines.com/midv-500/dataset/49_usa_ssn82.zip',
              'ftp://smartengines.com/midv-500/dataset/50_xpo_id.zip']
 
+
 def download_dataset(download_dir: str):
     """
     This script downloads the MIDV-500 dataset and unzips the folders.
@@ -66,18 +67,19 @@ def download_dataset(download_dir: str):
         print('Downloaded:', link[40:])
         # unzip zip file
         print('Unzipping:', link[40:])
-        zip_path = os.path.join(download_dir,link[40:])
+        zip_path = os.path.join(download_dir, link[40:])
         unzip(zip_path, download_dir)
         print('Unzipped:', link[40:].replace('.zip', ''))
         # remove zip file
         os.remove(zip_path)
+
 
 if __name__ == '__main__':
     # construct the argument parser
     ap = argparse.ArgumentParser()
 
     # add the arguments to the parser
-    ap.add_argument("download_dir", default = "data/", help="Directory for MIDV-500 dataset to be downloaded.")
+    ap.add_argument("download_dir", default="data/", help="Directory for MIDV-500 dataset to be downloaded.")
     args = vars(ap.parse_args())
 
     # download dataset
