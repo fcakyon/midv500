@@ -1,0 +1,3 @@
+opencv-python>=3.4.8.29
+numpy
+tqdm>=4.43.0

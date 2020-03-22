@@ -4,7 +4,7 @@ import json
 import argparse
 import numpy as np
 from tqdm import tqdm
-from utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
+from midv500.utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
 
 def convert(root_dir: str, export_dir: str):
     """
