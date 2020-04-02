@@ -1,4 +1,4 @@
-[![PyPI version](https://badge.fury.io/py/midv500.svg)](https://badge.fury.io/py/craft-text-detector)
+[![PyPI version](https://badge.fury.io/py/midv500.svg)](https://badge.fury.io/py/midv500)
 ![CI](https://github.com/fcakyon/midv500/workflows/CI/badge.svg)
 
 ## Download and convert MIDV-500 dataset into COCO instance segmentation format
