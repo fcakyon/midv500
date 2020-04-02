@@ -30,7 +30,7 @@ setuptools.setup(
     name="midv500",
     version=get_version(),
     author="Fatih Cagatay Akyon",
-    author_email="fatihcagatayakyon@gmail.com",
+    author_email="",
     description="Download and convert MIDV-500 annotations to COCO instance segmentation format",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
