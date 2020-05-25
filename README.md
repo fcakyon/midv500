@@ -1,13 +1,10 @@
-[![PyPI version](https://badge.fury.io/py/midv500.svg)](https://badge.fury.io/py/craft-text-detector)
+[![PyPI version](https://badge.fury.io/py/midv500.svg)](https://badge.fury.io/py/midv500)
 ![CI](https://github.com/fcakyon/midv500/workflows/CI/badge.svg)
 
 ## Download and convert MIDV-500 dataset into COCO instance segmentation format
 Automatically download/unzip MIDV-500 dataset and convert the annotations into COCO instance segmentation format.
 
 Then, dataset can be directly used in the training of Yolact, Detectron type of models.
-
- **Package maintainer: Fatih Cagatay Akyon**
-
 
 ## MIDV-500 Dataset
 MIDV-500 consists of 500 video clips for 50 different identity document types with ground truth which allows to perform research in a wide scope of various document analysis problems.
