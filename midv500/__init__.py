@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 from midv500.convert_dataset import convert as convert_to_coco
 
