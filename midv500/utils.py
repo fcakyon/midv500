@@ -86,8 +86,9 @@ def list_annotation_paths_recursively(directory: str, ignore_background_only_one
                     if intersect_area < 1:
                         continue
 
-                relative_filepath = abs_filepath.split(directory)[-1]
-                relative_filepath = relative_filepath.replace("\\", "/")  # for windows
+                abs_filepath = abs_filepath.replace("\\", "/")  # for windows
+                relative_filepath = abs_filepath.split(directory)[-1]  # get relative path from abs path
+                relative_filepath = [relative_filepath[1:] if relative_filepath[0] == "/" else relative_filepath]
                 relative_filepath_list.append(relative_filepath)
 
     number_of_files = len(relative_filepath_list)
