@@ -1,4 +1,4 @@
-name: midv500tococo
+name: midv500
 channels:
   - conda-forge
   - defaults
