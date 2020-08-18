@@ -43,7 +43,8 @@ class ConverterTests(unittest.TestCase):
         # read annotations paths
         annotation_paths = list_annotation_paths_recursively(directory, ignore_background_only_ones=True)
         self.assertEqual(len(annotation_paths), 90)
-        self.assertEqual(annotation_paths[3], '01_alb_id/ground_truth/HA/HA01_04.json')
+        self.assertNotEqual(annotation_paths[3][0], '/')
+        self.assertEqual(isinstance(annotation_paths[3], str), True)
 
     def test_download(self):
         from midv500.utils import download
