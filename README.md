@@ -1,3 +1,4 @@
+[![Downloads](https://pepy.tech/badge/midv500)](https://pepy.tech/project/midv500)
 [![PyPI version](https://badge.fury.io/py/midv500.svg)](https://badge.fury.io/py/midv500)
 ![CI](https://github.com/fcakyon/midv500/workflows/CI/badge.svg)
 
