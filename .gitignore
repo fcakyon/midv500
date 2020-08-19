@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#vscode
+# vscode
 .vscode
+
+# data
+midv500_data
