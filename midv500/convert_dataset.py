@@ -4,7 +4,11 @@ import json
 import argparse
 import numpy as np
 from tqdm import tqdm
-from midv500.utils import list_annotation_paths_recursively, get_bbox_inside_image, create_dir
+from midv500.utils import (
+    list_annotation_paths_recursively,
+    get_bbox_inside_image,
+    create_dir,
+)
 
 
 def convert(root_dir: str, export_dir: str):
@@ -19,7 +23,7 @@ def convert(root_dir: str, export_dir: str):
 
     # raise error if export_dir is given as a json file path
     if "json" in export_dir:
-        raise ValueError('export_dir should be a directory, not a file path!')
+        raise ValueError("export_dir should be a directory, not a file path!")
 
     # create export_dir if not present
     create_dir(export_dir)
@@ -43,9 +47,9 @@ def convert(root_dir: str, export_dir: str):
         # prepare image info
         image_dict = dict()
         image_dict["file_name"] = rel_image_path
-        image_dict['height'] = image.shape[0]
-        image_dict['width'] = image.shape[1]
-        image_dict['id'] = ind
+        image_dict["height"] = image.shape[0]
+        image_dict["width"] = image.shape[1]
+        image_dict["id"] = ind
         # add image info
         images.append(image_dict)
 
@@ -58,8 +62,8 @@ def convert(root_dir: str, export_dir: str):
 
         # load mask coords
         abs_annotation_path = os.path.join(root_dir, rel_annotation_path)
-        quad = json.load(open(abs_annotation_path, 'r'))
-        mask_coords = quad['quad']
+        quad = json.load(open(abs_annotation_path, "r"))
+        mask_coords = quad["quad"]
 
         # create mask from poly coords
         mask = np.zeros(image.shape, dtype=np.uint8)
@@ -77,20 +81,29 @@ def convert(root_dir: str, export_dir: str):
         label_bbox = get_bbox_inside_image(label_bbox, image_bbox)
 
         # calculate coco style bbox coords [minx, miny, width, height] and area
-        label_area = int((label_bbox[2]-label_bbox[0]) * (label_bbox[3]-label_bbox[1]))
-        label_bbox = [label_bbox[0], label_bbox[1], label_bbox[2]-label_bbox[0], label_bbox[3]-label_bbox[1]]
+        label_area = int(
+            (label_bbox[2] - label_bbox[0]) * (label_bbox[3] - label_bbox[1])
+        )
+        label_bbox = [
+            label_bbox[0],
+            label_bbox[1],
+            label_bbox[2] - label_bbox[0],
+            label_bbox[3] - label_bbox[1],
+        ]
 
         # prepare annotation info
         annotation_dict = dict()
         annotation_dict["iscrowd"] = 0
-        annotation_dict["image_id"] = image_dict['id']
-        annotation_dict['category_id'] = 1  # id card
-        annotation_dict['ignore'] = 0
-        annotation_dict['id'] = ind
+        annotation_dict["image_id"] = image_dict["id"]
+        annotation_dict["category_id"] = 1  # id card
+        annotation_dict["ignore"] = 0
+        annotation_dict["id"] = ind
 
-        annotation_dict['bbox'] = label_bbox
-        annotation_dict['area'] = label_area
-        annotation_dict['segmentation'] = [[single_coord for coord_pair in mask_coords for single_coord in coord_pair]]
+        annotation_dict["bbox"] = label_bbox
+        annotation_dict["area"] = label_area
+        annotation_dict["segmentation"] = [
+            [single_coord for coord_pair in mask_coords for single_coord in coord_pair]
+        ]
         # add annotation info
         annotations.append(annotation_dict)
 
@@ -98,22 +111,28 @@ def convert(root_dir: str, export_dir: str):
     coco_dict = dict()
     coco_dict["images"] = images
     coco_dict["annotations"] = annotations
-    coco_dict["categories"] = [{'name': 'id_card', 'id': 1}]
+    coco_dict["categories"] = [{"name": "id_card", "id": 1}]
 
     # export coco dict
     export_path = os.path.join(export_dir, "midv500_coco.json")
-    with open(export_path, 'w') as f:
+    with open(export_path, "w") as f:
         json.dump(coco_dict, f)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # construct the argument parser
     ap = argparse.ArgumentParser()
 
     # add the arguments to the parser
-    ap.add_argument("root_dir", default="data/", help="Directory of the downloaded MIDV-500 dataset.")
-    ap.add_argument("export_dir", default="coco/", help="Directory for coco file to be exported.")
+    ap.add_argument(
+        "root_dir",
+        default="data/",
+        help="Directory of the downloaded MIDV-500 dataset.",
+    )
+    ap.add_argument(
+        "export_dir", default="coco/", help="Directory for coco file to be exported."
+    )
     args = vars(ap.parse_args())
 
     # convert dataset
-    convert(args['root_dir'], args['export_dir'])
+    convert(args["root_dir"], args["export_dir"])

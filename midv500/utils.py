@@ -36,7 +36,9 @@ def get_bbox_inside_image(label_bbox: list, image_bbox: list) -> list:
     return corrected_label_bbox
 
 
-def list_annotation_paths_recursively(directory: str, ignore_background_only_ones: bool = True) -> list:
+def list_annotation_paths_recursively(
+    directory: str, ignore_background_only_ones: bool = True
+) -> list:
     """
     Accepts a folder directory containing image files.
     Returns a list of image file paths present in given directory.
@@ -66,9 +68,9 @@ def list_annotation_paths_recursively(directory: str, ignore_background_only_one
                 else:
                     try:
                         # load poly
-                        with open(abs_filepath, 'r') as json_file:
+                        with open(abs_filepath, "r") as json_file:
                             quad = json.load(json_file)
-                            coords = quad['quad']
+                            coords = quad["quad"]
                     except:
                         # fix for 29_irn_drvlic.json
                         continue
@@ -87,8 +89,14 @@ def list_annotation_paths_recursively(directory: str, ignore_background_only_one
                         continue
 
                 abs_filepath = abs_filepath.replace("\\", "/")  # for windows
-                relative_filepath = abs_filepath.split(directory)[-1]  # get relative path from abs path
-                relative_filepath = [relative_filepath[1:] if relative_filepath[0] == "/" else relative_filepath][0]
+                relative_filepath = abs_filepath.split(directory)[
+                    -1
+                ]  # get relative path from abs path
+                relative_filepath = [
+                    relative_filepath[1:]
+                    if relative_filepath[0] == "/"
+                    else relative_filepath
+                ][0]
                 relative_filepath_list.append(relative_filepath)
 
     number_of_files = len(relative_filepath_list)
@@ -111,6 +119,7 @@ class TqdmUpTo(tqdm):
     Provides `update_to(n)` which uses `tqdm.update(delta_n)`.
     https://pypi.org/project/tqdm/#hooks-and-callbacks
     """
+
     def update_to(self, b=1, bsize=1, tsize=None):
         """
         b  : int, optional
@@ -137,10 +146,15 @@ def download(url: str, save_dir: str):
     # create save_dir if not present
     create_dir(save_dir)
     # download file
-    with TqdmUpTo(unit='B', unit_scale=True, miniters=1,
-                  desc=url.split('/')[-1]) as t:  # all optional kwargs
-        urlretrieve(url, filename=os.path.join(save_dir, url.split('/')[-1]),
-                    reporthook=t.update_to, data=None)
+    with TqdmUpTo(
+        unit="B", unit_scale=True, miniters=1, desc=url.split("/")[-1]
+    ) as t:  # all optional kwargs
+        urlretrieve(
+            url,
+            filename=os.path.join(save_dir, url.split("/")[-1]),
+            reporthook=t.update_to,
+            data=None,
+        )
 
 
 def unzip(file_path: str, dest_dir: str):

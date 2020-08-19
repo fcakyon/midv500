@@ -11,19 +11,15 @@ def get_long_description():
 
 
 def get_requirements():
-    with open('requirements.txt') as f:
+    with open("requirements.txt") as f:
         return f.read().splitlines()
 
 
 def get_version():
     current_dir = os.path.abspath(os.path.dirname(__file__))
-    version_file = os.path.join(current_dir,
-                                "midv500",
-                                "__init__.py")
+    version_file = os.path.join(current_dir, "midv500", "__init__.py")
     with io.open(version_file, encoding="utf-8") as f:
-        return re.search(r'^__version__ = [\'"]([^\'"]*)[\'"]',
-                         f.read(),
-                         re.M).group(1)
+        return re.search(r'^__version__ = [\'"]([^\'"]*)[\'"]', f.read(), re.M).group(1)
 
 
 setuptools.setup(
@@ -42,5 +38,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=get_requirements(),
-    python_requires='>=3.5',
+    python_requires=">=3.5",
 )
