@@ -11,7 +11,7 @@ from midv500.utils import (
 )
 
 
-def convert(root_dir: str, export_dir: str):
+def convert(root_dir: str, export_dir: str, filename: str):
     """
     Walks inside root_dir (should oly contain original midv500 dataset folders),
     reads all annotations, and creates coco styled annotation file
@@ -114,7 +114,7 @@ def convert(root_dir: str, export_dir: str):
     coco_dict["categories"] = [{"name": "id_card", "id": 1}]
 
     # export coco dict
-    export_path = os.path.join(export_dir, "midv500_coco.json")
+    export_path = os.path.join(export_dir, filename + "_coco.json")
     with open(export_path, "w") as f:
         json.dump(coco_dict, f)
 
