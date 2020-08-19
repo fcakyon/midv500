@@ -3,7 +3,7 @@
 ![CI](https://github.com/fcakyon/midv500/workflows/CI/badge.svg)
 
 ## Download and convert MIDV-500 datasets into COCO instance segmentation format
-Automatically download/unzip [MIDV-500](https://arxiv.org/abs/1807.05786) and [MIDV-2019](https://arxiv.org/abs/1910.04009) datasets and convert the annotations into COCO instance segmentation format.
+Automatically download/unzip [MIDV-500](https://doi.org/10.18287/2412-6179-2019-43-5-818-824) and [MIDV-2019](https://doi.org/10.1117/12.2558438) datasets and convert the annotations into COCO instance segmentation format.
 
 Then, dataset can be directly used in the training of Yolact, Detectron type of models.
 
@@ -14,9 +14,9 @@ MIDV-500 consists of 500 video clips for 50 different identity document types in
 
 You can find more detail on papers:
 
-[MIDV-500: A Dataset for Identity Documents Analysis and Recognition on Mobile Devices in Video Stream](https://arxiv.org/abs/1807.05786)
+[MIDV-500: A Dataset for Identity Documents Analysis and Recognition on Mobile Devices in Video Stream](https://doi.org/10.18287/2412-6179-2019-43-5-818-824)
 
-[MIDV-2019: Challenges of the modern mobile-based document OCR](https://arxiv.org/abs/1910.04009)
+[MIDV-2019: Challenges of the modern mobile-based document OCR](https://doi.org/10.1117/12.2558438)
 
 
 ## Getting started

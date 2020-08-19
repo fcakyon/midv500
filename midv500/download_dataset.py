@@ -114,8 +114,8 @@ def download_dataset(download_dir: str, dataset_name: str = "midv500"):
     """
     This script downloads the MIDV-500 dataset with extra files and unzips the folders.
     dataset_name: str
-        "midv500": https://arxiv.org/abs/1807.05786
-        "midv2019": https://arxiv.org/abs/1910.04009
+        "midv500": https://doi.org/10.18287/2412-6179-2019-43-5-818-824
+        "midv2019": https://doi.org/10.1117/12.2558438
         "all": midv500 + midv2019
     """
 
